@@ -5,9 +5,8 @@ import '../styles/Badge.css';
 
 class Badge extends React.Component {
     render() {
-
         const {firstName, lastName, jobTitle, twitter, avatar} = this.props;
-
+        
         return (
             <div className="Badge">
                 <header className="Badge__header">
