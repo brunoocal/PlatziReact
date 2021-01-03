@@ -5,6 +5,9 @@ import '../styles/Badge.css';
 
 class Badge extends React.Component {
     render() {
+
+        const {firstName, lastName, jobTitle, twitter, avatar} = this.props;
+
         return (
             <div className="Badge">
                 <header className="Badge__header">
@@ -12,13 +15,13 @@ class Badge extends React.Component {
                 </header>
 
                 <div className="Badge__section-name">
-                    <img className="Badge__avatar" src="https://s.gravatar.com/avatar/01c1f19f59da0fd807e885cd60958f53?s=80" alt="Avatar"/>
-                    <h1>Bruno <br/> Cal</h1>
+                    <img className="Badge__avatar" src={avatar} alt="Avatar"/>
+                    <h1> {firstName}<br/> {lastName}</h1>
                 </div>
 
                 <div className="Badge__section-info">
-                    <h3>Frontend Student</h3>
-                    <div>@brunoocal</div>
+                    <h3>{jobTitle}</h3>
+                    <div>@{twitter}</div>
                 </div>
 
                 <div className="Badge__footer">
