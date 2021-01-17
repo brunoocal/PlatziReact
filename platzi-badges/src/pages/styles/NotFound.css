@@ -1,0 +1,39 @@
+html{
+    overflow: hidden;
+}
+
+.NotFound__container{
+    width: 100vw;
+    height: 100vh;
+    background: url("../../images/stars.svg"), #1b1b25;
+    background-repeat: repeat;
+
+}
+
+.NotFound__all{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 7%;
+}
+
+.NotFound__info{
+    color: white;
+    align-self: center;
+    justify-self: center;
+}
+
+.NotFound__container img{
+    width:30%;
+    margin-bottom: 2rem;
+}
+
+.NotFound__container h1{
+    font-size: 4vw;
+    letter-spacing: 2px;
+}
+
+.NotFound__container p{
+    font-size: 2vw;
+}
