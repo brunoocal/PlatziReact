@@ -45,9 +45,14 @@
   height: 90px;
   width: 100%;
 }
+.Badges__img-container{
+ width: 20%;
+}
 
 .Badges__img {
   border-radius: 50%;
+  width: 100%;
+  
 }
 
 .Badges__info {
@@ -72,4 +77,9 @@
 .Badges__twitter-name {
   margin: 0;
   font-size: 0.98rem;
+}
+
+.loadMore{
+  justify-self: center;
+  align-self: center;
 }
