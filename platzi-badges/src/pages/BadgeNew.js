@@ -4,16 +4,40 @@ import './styles/BadgeNew.css'
 import Badge from '../components/Badge'
 import Navbar from '../components/Navbar'
 import BadgeForm from '../components/BadgeForm'
-import header from '../images/badge-header.svg'
-
+import header from '../images/platziconf-logo.svg'
+import api from '../api'
 class BadgeNew extends React.Component{
-    state = {form: {
+    state = {
+        loading: false,
+        error: null,
+        form: {
         firstName: '',
         lastName: '',
         email: '',
         jobTitle: '',
         twitter: ''
-    }};
+        },
+        //Añadimos valores para pasar por props por default
+        progressBar: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            jobTitle: '',
+            twitter: '',
+            async_api: ''
+        }
+    };
+
+    handleSubmit = async e => {
+        this.setState({loading: true, error: null})
+        
+        try{
+            await api.badges.create(this.state.form);
+            this.setState({loading: false})
+        }catch (err){
+            this.setState({loading: false, error: err})
+        }
+    }
 
     handleChange = e => {
         this.setState({
@@ -35,15 +59,15 @@ class BadgeNew extends React.Component{
                     <div className="row">
                         <div className="col-6">
                             <Badge 
-                            firstName={this.state.form.firstName}
-                            lastName={this.state.form.lastName}
-                            twitter={this.state.form.twitter}
-                            jobTitle={this.state.form.jobTitle}
-                            email={this.state.form.email}/>
+                            firstName={this.state.form.firstName || "FIRST NAME"}
+                            lastName={this.state.form.lastName || "LAST NAME"}
+                            twitter={this.state.form.twitter || "TWITTER"}
+                            jobTitle={this.state.form.jobTitle || "JOB TITLE"}
+                            email={this.state.form.email || "EMAIL@EXAMPLE.COM"}/>
                         </div>
 
-                        <div className="col-6">
-                            <BadgeForm onChange={this.handleChange} formValues={this.state.form}/>
+                        <div className="col-6 form">
+                            <BadgeForm onSubmit={this.handleSubmit} onChange={this.handleChange} formValues={this.state}/>
                         </div>
                     </div>
                 </div>

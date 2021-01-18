@@ -1,0 +1,21 @@
+.NotFound__container{
+    text-align: center;
+}
+
+.NotFound__container h1{
+    font-size: 3.5vw;
+    letter-spacing: 2px;
+}
+
+.NotFound__container h2{
+    font-size: 2vw;
+}
+
+.NotFound__container h6{
+    font-size: 1.5vw;
+}
+
+.btn{
+    color: black !important;
+    margin-top: 5%;
+}

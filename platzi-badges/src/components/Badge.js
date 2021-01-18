@@ -1,11 +1,13 @@
 import React from 'react';
 
 import confLogo from '../images/badge-header.svg';
+import twitterImg from '../images/twitter.svg'
 import '../styles/Badge.css';
+import Gravatar from './Gravatar'
 
 class Badge extends React.Component {
     render() {
-        const {firstName, lastName, jobTitle, twitter, avatar} = this.props;
+        const {firstName, lastName, jobTitle, twitter, email} = this.props;
         
         return (
             <div className="Badge">
@@ -14,13 +16,16 @@ class Badge extends React.Component {
                 </header>
 
                 <div className="Badge__section-name">
-                    <img className="Badge__avatar" src={avatar} alt="Avatar"/>
+                    <Gravatar className="Badge__avatar" email={email}/>
                     <h1> {firstName}<br/> {lastName}</h1>
                 </div>
 
                 <div className="Badge__section-info">
                     <h3>{jobTitle}</h3>
-                    <div>@{twitter}</div>
+                    <div className="Badges__twitter-container">
+                        <img className="Badges__twitter-img" src={twitterImg} alt=""/>
+                        <a className="Badges__twitter-name" href={'https://www.twitter.com/' + twitter}>@{twitter}</a>
+                    </div>
                 </div>
 
                 <div className="Badge__footer">

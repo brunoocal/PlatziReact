@@ -1,45 +1,36 @@
 import React from 'react';
-import Navbar from '../components/Navbar.js';
+import Loader from '../components/Loader.js';
 import BadgesList from '../components/BadgesList.js';
+import NoAPIDataBadge from '../components/NoAPIDataBadge'
 import logo from '../images/badge-header.svg';
+import Error from '../components/Error.js'
 import {Link} from 'react-router-dom'
+import api from '../api.js'
 import './styles/Badges.css';
+import './styles/Loader.css';
 class Badges extends React.Component {
 
         state = {
-            page: 1,
-            data: {
-                results: []
-            },
+            data: undefined,
             loading: true,
             error: null
         }
 
-        constructor(props){
-            super(props)
-        }
-
         componentDidMount(){
-            this.fetchCharacters();
+            this.fetchData();
         }
 
-        async fetchCharacters(){
+        async fetchData(){
             this.setState({
                 loading: true,
                 error: null
             })
 
             try{
-                const response = await fetch(`https://rickandmortyapi.com/api/character?page=${this.state.page}`)
-                const data = await response.json();
-    
+                const data = await api.badges.list();
                 this.setState({
-                    data: {
-                        info: data.info,
-                        results: [].concat(this.state.data.results, data.results)
-                    },
                     loading: false,
-                    page: this.state.page + 1
+                    data
                 })
             }catch(err){
                 this.setState({
@@ -52,14 +43,18 @@ class Badges extends React.Component {
             
         }
 
-        componentWillUnmount() {
-            
-        }
-
     render() {
 
         if(this.state.error){
-            return `Error: ${this.state.error}`
+            return (
+                <Error error={this.state.error}/>
+            )
+        }
+
+        if(this.state.loading === true){
+            return (
+                <Loader/>
+            );
         }
 
         return (
@@ -71,26 +66,29 @@ class Badges extends React.Component {
                         </div>
                     </div>
                     
-                    <div className="Badges__container">
+                    {this.state.data.length >=1 && (
+                        <div className="Badges__container">
                             <div className="Badges__buttons">
                                 <Link className="btn btn-primary" to="/badges/new">New Badge</Link>
                             </div>
-                        </div>
-
-                </div>
-
-
-                <div className="Badges__list">
-                    <div className="Badges__container">
-                        <BadgesList badges={this.state.data}/>
-                        {!this.state.loading && (
-                        <button className="btn btn-primary loadMore" onClick={() => this.fetchCharacters()}>Cargar más</button>
-                        )}
                     </div>
-
+                    )}
                     
 
                 </div>
+
+
+                {this.state.data.length <= 0 && (<NoAPIDataBadge/>)}
+
+                {
+                    this.state.data.length >= 1 && (
+                        <div className="Badges__list">
+                            <div className="Badges__container">
+                            {<BadgesList badges={this.state.data}/>}
+                            </div>
+                        </div>
+                    )
+                }
 
             </React.Fragment>
         )
