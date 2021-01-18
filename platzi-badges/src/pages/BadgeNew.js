@@ -9,7 +9,7 @@ import api from '../api'
 class BadgeNew extends React.Component{
     state = {
         loading: false,
-        error: null,
+        error: undefined,
         form: {
         firstName: '',
         lastName: '',
@@ -27,17 +27,6 @@ class BadgeNew extends React.Component{
             async_api: ''
         }
     };
-
-    handleSubmit = async e => {
-        this.setState({loading: true, error: null})
-        
-        try{
-            await api.badges.create(this.state.form);
-            this.setState({loading: false})
-        }catch (err){
-            this.setState({loading: false, error: err})
-        }
-    }
 
     handleChange = e => {
         this.setState({
@@ -67,7 +56,7 @@ class BadgeNew extends React.Component{
                         </div>
 
                         <div className="col-6 form">
-                            <BadgeForm onSubmit={this.handleSubmit} onChange={this.handleChange} formValues={this.state}/>
+                            <BadgeForm history={this.props.history} onChange={this.handleChange} formValues={this.state}/>
                         </div>
                     </div>
                 </div>

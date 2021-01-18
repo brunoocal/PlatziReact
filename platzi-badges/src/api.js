@@ -27,10 +27,16 @@ const api = {
       return callApi('/badges');
     },
     create(badge) {
-      return callApi(`/badges`, {
-        method: 'POST',
-        body: JSON.stringify(badge),
-      });
+      let random = (Math.random() * 1);
+
+      if(random <= 0.50){
+        throw("500: server error");
+      }else{
+        return callApi(`/badges`, {
+          method: 'POST',
+          body: JSON.stringify(badge),
+        });
+      }
     },
     read(badgeId) {
       return callApi(`/badges/${badgeId}`);
