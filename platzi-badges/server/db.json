@@ -1,33 +1,6 @@
 {
   "badges": [
     {
-      "id": "2de30c42-9deb-40fc-a41f-05e62b5939a7",
-      "firstName": "Freda",
-      "lastName": "Grady",
-      "email": "Leann_Berge@gmail.com",
-      "jobTitle": "Legacy Brand Director",
-      "twitter": "FredaGrady22221-7573",
-      "avatarUrl": "https://www.gravatar.com/avatar/f63a9c45aca0e7e7de0782a6b1dff40b?d=identicon"
-    },
-    {
-      "id": "d00d3614-101a-44ca-b6c2-0be075aeed3d",
-      "firstName": "Major",
-      "lastName": "Rodriguez",
-      "email": "Ilene66@hotmail.com",
-      "jobTitle": "Human Research Architect",
-      "twitter": "MajorRodriguez61545",
-      "avatarUrl": "https://www.gravatar.com/avatar/d57a8be8cb9219609905da25d5f3e50a?d=identicon"
-    },
-    {
-      "id": "63c03386-33a2-4512-9ac1-354ad7bec5e9",
-      "firstName": "Daphney",
-      "lastName": "Torphy",
-      "email": "Ron61@hotmail.com",
-      "jobTitle": "National Markets Officer",
-      "twitter": "DaphneyTorphy96105",
-      "avatarUrl": "https://www.gravatar.com/avatar/e74e87d40e55b9ff9791c78892e55cb7?d=identicon"
-    },
-    {
       "firstName": "Richard",
       "lastName": "Kaufman López",
       "email": "richardbkaufman@gmail.com",
@@ -37,29 +10,12 @@
       "id": "EYR2BVQ"
     },
     {
-      "firstName": "Carolynn",
-      "lastName": "Kaufman",
-      "email": "carolynn@example.com",
-      "avatarUrl": "https://www.gravatar.com/avatar/580a552f26ac5e3a0817c3ecc5b9d690?d=identicon",
-      "jobTitle": "Lawyer",
-      "twitter": "ckaufmanpr",
-      "id": "npaYZKI"
-    },
-    {
       "firstName": "Bruno",
       "lastName": "Cal",
       "email": "br1calolivera@gmail.com",
       "jobTitle": "Frontend Student",
       "twitter": "brunoo_cal",
-      "id": "fP3-ehH"
-    },
-    {
-      "firstName": "Rogelio",
-      "lastName": "sads",
-      "email": "br1calolivera@gmail.com",
-      "jobTitle": "sadassa",
-      "twitter": "sads",
-      "id": "0F8PObe"
+      "id": "WbhehHq"
     }
   ]
 }

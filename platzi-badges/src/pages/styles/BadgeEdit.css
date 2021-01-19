@@ -1,0 +1,30 @@
+.BadgeEdit__hero {
+    width: 100%;
+    padding: 2rem 0;
+    background: url("../../images/stars.svg"), #1b1b25;
+    background-repeat: repeat;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+.BadgeEdit__hero img{
+    margin-left: 15%;
+    margin-bottom: 1%;
+    max-height: 100px;
+}
+
+#app{
+    position: relative;
+}
+
+.form{
+    position: relative;
+    bottom: 100px;
+    background: #fff;
+    border-radius: 3%;
+    padding-top: 2%;
+}
+
+.form-control{
+    border: 1px solid rgba(0, 0, 0, 0.45);
+}
+

@@ -83,3 +83,15 @@
   justify-self: center;
   align-self: center;
 }
+
+.Badges__edit-container{
+  max-height: 30px;
+  margin-left: 5%;
+  max-width: 30px;
+  justify-self: center;
+  align-self: center;
+}
+
+.Badges__edit-container img{
+   width: 100%;
+}

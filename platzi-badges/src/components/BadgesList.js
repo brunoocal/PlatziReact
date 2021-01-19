@@ -4,6 +4,7 @@ import twitter from '../images/twitter.svg';
 import NoAPIDataBadge from './NoAPIDataBadge.js';
 import {Link} from 'react-router-dom';
 import Gravatar from './Gravatar'
+import edit from '../images/edit.png'
 class BadgesList extends React.Component{
 
 
@@ -15,7 +16,7 @@ class BadgesList extends React.Component{
             <ul className="list-unstyled">
                 {badgesList.map((badge) => {
                     return (
-                     <li className="Badges__ul-item" key={badge.id}>
+                     <li className="Badges__ul-item" key={badge.id}> 
                         <div className="Badges__img-container">
                             <Gravatar className="Badges__img" email={badge.email} />
                         </div>
@@ -26,6 +27,11 @@ class BadgesList extends React.Component{
                                 <a className="Badges__twitter-name" href={'https://www.twitter.com/' + badge.twitter}>@{badge.twitter}</a>
                             </div>
                             <p className="Badges__info-desc">{badge.jobTitle}</p>
+                        </div>
+                        <div className="Badges__edit-container">
+                            <Link to={`/badges/${badge.id}/edit`}>
+                                <img src={edit} alt="Editar"/>
+                            </Link>
                         </div>
                      </li>
                     )

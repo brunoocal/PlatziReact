@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import api from '../api.js'
 import '../pages/styles/ProgressBar.css'
 
-class BadgeForm extends React.Component{
+class BadgeFormEdit extends React.Component{
 
     //Creo mi objeto controlador de la barra de progreso con los valores de inicio
     progressBar = {
@@ -27,7 +27,7 @@ class BadgeForm extends React.Component{
         }
         
         try{
-            await api.badges.create(this.props.formValues.form);
+            await api.badges.create(this.props.badgeId, this.props.formValues.form);
         }catch (err){
             this.progressBar = {
                 ... this.progressBar,
@@ -242,4 +242,4 @@ class BadgeForm extends React.Component{
     
 }
 
-export default BadgeForm
+export default BadgeFormEdit
