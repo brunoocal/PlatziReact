@@ -2,11 +2,12 @@ import React from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import api from '../api.js'
+import Badge from '../components/Badge.js'
 import '../pages/styles/ProgressBar.css'
+import swal from '@sweetalert/with-react'
 
 class BadgeFormEdit extends React.Component{
 
-    //Creo mi objeto controlador de la barra de progreso con los valores de inicio
     progressBar = {
         values: {
             ... this.props.formValues.progressBar
@@ -27,52 +28,58 @@ class BadgeFormEdit extends React.Component{
         }
         
         try{
-            await api.badges.create(this.props.badgeId, this.props.formValues.form);
+            await api.badges.update(this.props.badgeId, this.props.formValues.form);
+            return this.progressBar
         }catch (err){
             this.progressBar = {
                 ... this.progressBar,
-                variant: "danger", //Color rojito
-                error: false, //Error
+                variant: "danger", 
+                error: false, 
                 error_api: true,
                 error_api_msg: err,
             }
 
             this.progressBar = {
                 ... this.progressBar,
-                message: `¡Ha ocurrido un error con el API: ${this.progressBar.error_api_msg}`, //Mensaje de error
+                message: `¡Ha ocurrido un error con el API: ${this.progressBar.error_api_msg}`, 
             }
+            return this.progressBar
         }
     }
 
-    //Este método se llamará cada vez que alguna de los elementos <Input/> sea deseleccionado: onBlur() on React
     handleProgressBarChange = (event) => {
-        //Convierto el objeto con los valores de los formularios que me llega desde PROPS, IMPORTANTE, 
-        //porque sino nunca tendríamos los valores de entrada del formulario.
         const list = Object.keys(this.props.formValues.progressBar).map((key) => [String(key), this.props.formValues.form[key]]);
-
-        //formInput es el resultado dentro del array list, donde element === event.target.value, osea, que el elemento 
-        //sea igual al valor que nos vino por el evento:
-        //si este evento lo ejecuta el <Input name="firstName"/>, formInput será el array dentro de list, 
-        //que tenga el valor de entrada de firstName
         const formInput = list.find(index => index.find(element => element === event.target.value) )
-        //value es el valor que se le asignará a nuestro objeto controlador de la progressbar cada vez que sea llamado el evento, 
-        //tengo 5 inputs, pero agregé 1 para la llamada al API (simulada)
-        //entonces cada input tendría un valor total en la progressbar de 16.66667%
-        //Si formInput está indefinido, se asigna 0, si no, luego se comprueba que el valor 1 en el array formInput, 
-        //sea igual al parámentro de entrada del <Input/> que accionó el evento,
-        //Sí es true, 16.6667, sino, 0.
         const value = (formInput === undefined) ? 0 : (formInput[1] === event.target.value) ? 16.66667 : 0;
+            this.progressBar = {
+                ... this.progressBar,
+                values: {
+                    ... this.progressBar.values,
+                    [event.target.name]: value
+                }
+            }
+        
+        this.forceUpdate();
+    }
 
-        //Hacemos una copia del objeto progressbar, solo cambiando en values, el valor que hemos detectado en el evento.
-        this.progressBar = {
-            ... this.progressBar,
-            values: {
-                ... this.progressBar.values,
-                [event.target.name]: value
+    handleReadBadge = () => {
+        const list = Object.keys(this.props.formValues.form).map((key) => [String(key), this.props.formValues.form[key]]);
+        
+        this.withoutUpdateBadge = this.props.formValues.form;
+
+        list.forEach(element => {
+        const value = (element === undefined) ? 0 : (element[1] !== "") ? 16.66667 : 0;
+        if(!(element[0].includes("id") || element[0].includes("avatarUrl"))){
+            this.progressBar = {
+                ... this.progressBar,
+                values: {
+                    ... this.progressBar.values,
+                    [element[0]]: value
+                }
             }
         }
-        //forzamos update del componente para que este dato de progressbar llegue a nuestro componente de Bootstrap, <Progressbar/>
-        //Esto desencadenará que siga nuestro algoritmo en componentWillUpdate()
+        });
+
         this.forceUpdate();
     }
 
@@ -81,46 +88,38 @@ class BadgeFormEdit extends React.Component{
     }
 
     renderProgressBar = () => {
-        //Inicializo las vars
-        this.progressBar = {
-            ... this.progressBar,
-            values: {
-                ... this.progressBar.values,
-                async_api: 0
-            },
+        if(this.progressBar.redirect){
+           
+            this.progressBar = {
+                ... this.progressBar,
+                values: {
+                    ... this.progressBar.values,
+                    async_api: 0
+                },
+            }
+
         }
         let perc = 0;
         let message;
         let variant;
         
-        //Convierto this.progressBar.values en un Array para poder hacer forEach
         const list = Object.keys(this.progressBar.values).map((key) => [String(key), this.progressBar.values[key]]);
 
-        //Hago un forEach para sumar, todos los valores de cada uno de los <Input/>, que hayan activado el evento de onBlur()
           list.forEach(element => {
              perc += element[1];
           });
 
-        const withoutData = (5 - (perc / 16.66667)); //Variable para saber cuantas casillas hay sin datos
-        //Aquí manejamos los mensajes y las variantes de color de nuestra <Progressbar>
-        console.log(this.progressBar)
-        message = (withoutData <=0) ? (this.progressBar.success 
-            ? this.progressBar.message : (this.progressBar.error_api 
-            ? `¡Ha ocurrido un error con el API: ${this.progressBar.error_api_msg}` : "¡Tú Badge está lista, ¿No quedó genial?!")) 
-            : (this.progressBar.error ? "¡Necesitas rellenar todos los datos!" : "¡Faltan " + withoutData + " casillas por completar!");
-        //Basicamente lo mismo que arriba pero con los colores de variantes
-        variant = (withoutData <= 0) 
-        ? this.progressBar.variant : (this.progressBar.error 
-        ? this.progressBar.variant : (this.progressBar.error_api 
-        ? this.progressBar.variant : "warning"))
-        //Cambiamos los valores de nuestro controlador para agregar el porcentaje, que este valor usará <ProgressBar/>
+        const withoutData = (5 - (perc / 16.66667)); 
+        message = (withoutData <=0) ? (this.progressBar.success ? this.progressBar.message : (this.progressBar.error_api ? `¡Ha ocurrido un error con el API: ${this.progressBar.error_api_msg}` : "¡Tú Badge está lista, ¿No quedó genial?!")) : (this.progressBar.error ? "¡Necesitas rellenar todos los datos!" : "¡Faltan " + withoutData + " casillas por completar!");
+        variant = (withoutData <= 0) ? (this.progressBar.success ? this.progressBar.variant : "warning") : (this.progressBar.error ? this.progressBar.variant : (this.progressBar.error_api ? this.progressBar.variant : "warning"))
         this.progressBar = {
             ... this.progressBar,
             porcent: perc,
             message: message,
             variant: variant,
             error: false,
-            error_api: false
+            error_api: false,
+            success: false
         }
         
         if(this.progressBar.redirect){
@@ -133,14 +132,18 @@ class BadgeFormEdit extends React.Component{
 
     }
     
+    componentDidMount(){
+        setTimeout(() => {
+            this.handleReadBadge();
+        }, 1650)
+    }
+
     componentWillUpdate(){
-        //Es importante que sea componentWillUpdate() y no componentDidUpdate()
-        //¿Porqué? Es porque componentWillUpdate ejecutará los métodos de este bloque antes de renderizar
-        //entonces nuestro componente <Progressbar/> podrá actualizarse con los valores que vamos a declarar en renderProgressBar()
         this.renderProgressBar();
     }
 
-    submitApi = e => {
+    submitApi = async e => {
+
         this.progressBar = {
             ... this.progressBar,
             values: {
@@ -148,53 +151,115 @@ class BadgeFormEdit extends React.Component{
                 async_api: 0
             },
         }
-        //Cuando el usuario haga Submit, se ejecuta esta función que es una función padre entre la que recibimos por props de BadgeNew.js
-        //y la que necesitamos para simular nuestro API
-
-        //Prevenimos recarga
         e.preventDefault();
-        //Si no hay casillas vacías
         if((this.progressBar.porcent / 16.66667) >= 5 && this.progressBar.error_api === false){
-        this.handleSubmit();
-        
-        
 
-        //Esto significa que todo correcto, entonces actualizamos nuestro controlador
-        if(this.progressBar.error_api === false){
+            await swal({
+                buttons: {
+                  cancel: "¡No!",
+                  accept: "¡Sí!",
+                },
+                className: "Swal__large",
+                dangerMode: true,
+                icon: "error",
+                content: (
+                    <div>
+                        <h2>¿Deseas aplicar los cambios?</h2>
+                        <div className="Swal__grid">
+                            <div className="Swal__item">
+                                <p>Antiguo Badge</p>
+                                <Badge 
+                                firstName={this.withoutUpdateBadge.firstName}
+                                lastName={this.withoutUpdateBadge.lastName}
+                                twitter={this.withoutUpdateBadge.twitter}
+                                jobTitle={this.withoutUpdateBadge.jobTitle}
+                                email={this.withoutUpdateBadge.email}/>
+                            </div>
+                            <div className="Swal__item">
+                                <p>Nuevo Badge</p>
+                                <Badge 
+                                firstName={this.props.formValues.form.firstName}
+                                lastName={this.props.formValues.form.lastName}
+                                twitter={this.props.formValues.form.twitter}
+                                jobTitle={this.props.formValues.form.jobTitle}
+                                email={this.props.formValues.form.email}/>
+                            </div>
+                        </div>
+                        
+                    </div>
+                )
+              })
+              .then((value) => {
+                switch (value) {
+                  case "accept":
+                    swal({
+                        button: "¡Ok!",
+                        icon: "success",
+                        content: (
+                            <div>
+                                <h2>Se ha enviado la petición al servidor.</h2>
+                            </div>
+                        )
+                    })
+                    this.conditionalSubmit(true).then((bool) => {})
+                    break;
+                
+                    default:
+                        this.conditionalSubmit(false).then((bool) => {})
+                    break;
+                }
+                
+              });
+              
+        this.forceUpdate()
+    }else{
+        this.conditionalSubmit(false).then((bool) => {})
+    }
+
+  }   
+
+  conditionalSubmit = async (conditional) => {
+    await this.handleSubmit().then((progressBarObj) => {
+
+        if(progressBarObj.error_api === false && progressBarObj.error === false){
             this.progressBar = {
                 ... this.progressBar,
                 values: {
                     ... this.progressBar.values,
-                    //Aquí async_api es el 6to miembro de nuestro 100% para la <ProgressBar>, le daremos también su 16.6667%
                     async_api: 16.66667
                 },
-                message: "¡Tu badge ha sido enviada a nuestra API!", //Mensaje para confirmar que todo bien
-                variant: "success", //ProgressBar de color verde
-                error: false, //Sin errores
+                message: "¡Tu badge ha sido enviada a nuestra API!", 
+                variant: "success", 
+                error: false, 
                 error_api: false,
                 success: true,
-                redirect: true //Todo correcto
+                redirect: true 
             }
         }
-
-        }else{ //Sino, algo salió mal/no llenó todas las casillas
+        if(progressBarObj.error_api === true || conditional === false){ 
             this.progressBar = {
                 ... this.progressBar,
                 values: {
                     ... this.progressBar.values,
-                    async_api: 0 //Nuestro 6to miembro de la <ProgressBar/>, con 0.
+                    async_api: 0 
                 },
-                variant: "danger", //Color rojito
+                variant: "danger", 
                 error: ((this.progressBar.porcent / 16.66667) >= 5) ? false : true,
                 redirect: false,
-                error_api: this.progressBar.error_api == Boolean ? this.progressBar.error_api : false, //Error
+                error_api: this.progressBar.error_api == Boolean ? this.progressBar.error_api : false, 
                 error_api_msg: this.progressBar.error_api_msg,
-                message: (this.progressBar.error_api) ? `¡Ha ocurrido un error con el API: ${this.progressBar.error_api_msg}` 
-                : "¡Tienes que rellenar todas las casillas!", //Mensaje de error
+                message: (this.progressBar.error_api) ? `¡Ha ocurrido un error con el API: ${this.progressBar.error_api_msg}` : "¡Tienes que rellenar todas las casillas!",
+                success: false 
             }
         }
-        this.forceUpdate() //Forzamos update para que la progressBar se refresque
-    }
+
+    })
+    
+    this.forceUpdate();
+
+    return conditional;
+}
+
 
     render() {
         return (

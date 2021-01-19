@@ -6,6 +6,7 @@ import BadgeFormEdit from '../components/BadgeFormEdit'
 import header from '../images/platziconf-logo.svg'
 import api from '../api';
 
+
 class BadgeEdit extends React.Component{
     state = {
         loading: true,
@@ -75,7 +76,6 @@ class BadgeEdit extends React.Component{
 
                         <div className="col-6 form">
                             <h1>Edit Badge</h1>
-                            {/* ARREGLAR BADGEFORMEDIT PROGRESSBAR BUG */}
                             <BadgeFormEdit badgeId={this.props.match.params.badgeId} history={this.props.history} onChange={this.handleChange} formValues={this.state}/>
                         </div>
                     </div>

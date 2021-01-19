@@ -28,3 +28,19 @@
     border: 1px solid rgba(0, 0, 0, 0.45);
 }
 
+.Swal__large{
+    width: 80%;
+}
+
+.Swal__large .Badge{
+    margin: 0 1%;
+}
+
+.Swal__grid{
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+.Swal__item{
+    grid-column: span 1;
+}

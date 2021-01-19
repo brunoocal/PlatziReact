@@ -2,10 +2,10 @@
   "badges": [
     {
       "firstName": "Richard",
-      "lastName": "Kaufman López",
+      "lastName": "Kaufman",
       "email": "richardbkaufman@gmail.com",
       "avatarUrl": "https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon",
-      "jobTitle": "Frontend Engineer @ Kickass Partners",
+      "jobTitle": "Frontend Engineer",
       "twitter": "sparragus",
       "id": "EYR2BVQ"
     },
@@ -16,6 +16,38 @@
       "jobTitle": "Frontend Student",
       "twitter": "brunoo_cal",
       "id": "WbhehHq"
+    },
+    {
+      "firstName": "Facundo",
+      "lastName": "Pérez",
+      "email": "facuperez@gmail.com",
+      "jobTitle": "Jugador profesional de Valorant",
+      "twitter": "facuuperez",
+      "id": "IKWz3F6"
+    },
+    {
+      "firstName": "Facundo",
+      "lastName": "Cal",
+      "email": "br1calolivera@gmail.com",
+      "jobTitle": "Frontend Student",
+      "twitter": "sadsa",
+      "id": "WWscGaU"
+    },
+    {
+      "firstName": "Bruno",
+      "lastName": "Cal",
+      "email": "br1calolivera@gmail.com",
+      "jobTitle": "Frontend Student",
+      "twitter": "dev.com",
+      "id": "2dTP5rC"
+    },
+    {
+      "firstName": "Bruno",
+      "lastName": "Cal",
+      "email": "br1calolivera@gmail.com",
+      "jobTitle": "Frontend Student",
+      "twitter": "asdsa",
+      "id": "1BvB_VY"
     }
   ]
 }
