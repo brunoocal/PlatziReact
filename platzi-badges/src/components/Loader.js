@@ -12,7 +12,7 @@ function Loader() {
           <div></div>
           <div></div>
           <div></div>
-          <div></div>
+          <div> </div>
         </div>
       </div>
     </React.Fragment>

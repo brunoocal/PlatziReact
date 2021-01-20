@@ -2,10 +2,8 @@ import React from "react";
 
 import "./styles/BadgeNew.css";
 import Badge from "../components/Badge";
-import Navbar from "../components/Navbar";
 import BadgeForm from "../components/BadgeForm";
 import header from "../images/platziconf-logo.svg";
-import api from "../api";
 class BadgeNew extends React.Component {
   state = {
     loading: false,

@@ -19,7 +19,7 @@ function Home() {
             </Link>
           </div>
           <div className="Home__astronauts">
-            <img src={astronauts} alt="Astronauts photo" />
+            <img src={astronauts} alt="Astronauts" />
           </div>
         </div>
       </div>

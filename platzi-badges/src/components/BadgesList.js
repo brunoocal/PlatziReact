@@ -1,7 +1,6 @@
 import React from "react";
 
 import twitter from "../images/twitter.svg";
-import NoAPIDataBadge from "./NoAPIDataBadge.js";
 import { Link } from "react-router-dom";
 import Gravatar from "./Gravatar";
 import edit from "../images/edit.png";

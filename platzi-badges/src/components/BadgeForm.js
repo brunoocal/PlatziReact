@@ -1,6 +1,5 @@
 import React from "react";
 import { ProgressBar } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
 import api from "../api.js";
 import "../pages/styles/ProgressBar.css";
 import swal from "@sweetalert/with-react";

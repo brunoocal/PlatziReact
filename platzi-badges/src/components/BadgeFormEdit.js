@@ -1,6 +1,5 @@
 import React from "react";
 import { ProgressBar } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
 import api from "../api.js";
 import Badge from "../components/Badge.js";
 import "../pages/styles/ProgressBar.css";
