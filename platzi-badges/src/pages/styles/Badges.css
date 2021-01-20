@@ -35,18 +35,11 @@
   align-items: center;
 }
 
-.list-unstyled{
-  width: 80%;
-}
-
 .Badges__ul-item {
   display: flex;
   margin-top: 1.5rem;
   height: 90px;
   width: 100%;
-}
-.Badges__img-container{
- width: 20%;
 }
 
 .Badges__img {
@@ -83,15 +76,23 @@
   justify-self: center;
   align-self: center;
 }
+.Badges__icons-container{
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .Badges__edit-container{
-  max-height: 30px;
-  margin-left: 5%;
-  max-width: 30px;
+  height: 30px;
+  width: 30px;
   justify-self: center;
   align-self: center;
 }
 
 .Badges__edit-container img{
    width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
 }

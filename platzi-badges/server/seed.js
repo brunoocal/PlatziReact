@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const faker = require('faker');
-const md5 = require('md5');
+const fs = require("fs");
+const path = require("path");
+const faker = require("faker");
+const md5 = require("md5");
 
 function createBadges(limit = 50) {
   const result = [];
@@ -31,7 +31,7 @@ function main() {
   };
 
   fs.writeFileSync(
-    path.resolve(__dirname, 'db.json'),
+    path.resolve(__dirname, "db.json"),
     JSON.stringify(data, null, 4)
   );
 }

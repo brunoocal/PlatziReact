@@ -1,0 +1,29 @@
+.BadgeDetails__hero {
+    width: 100%;
+    padding: 2rem 0;
+    background: url('../../images/stars.svg'), #1B1B25;
+    background-repeat: repeat;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  
+  .BadgeDetails__hero img{
+    width: 20%;
+  }
+
+  .BadgeDetails__hero-attendant-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .BadgeDetails__buttons {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-bottom: 1rem;
+  }
+  
